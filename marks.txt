@@ -1,0 +1,6 @@
+## Main marks 
+1.Want to cook button clicked then added to want to cook section
+2.Use toast in website when want to cook button is clicked second time
+
+## Bonus marks
+Watch the vdo or read the requirements pdf
