@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+       backgroundImage: {
+        'hero-pattern': "url('./public/img/chef.jpeg')",
+      }
+    },
     colors: {
       'light-green': '#0BE58A',
       'white': '#FFF',
