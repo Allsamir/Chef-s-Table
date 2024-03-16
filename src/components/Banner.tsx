@@ -4,7 +4,7 @@ import React from 'react'
 export const Banner: React.FC = () => {
   return (
     <div className="bg-hero-pattern rounded-3xl mt-12 mb-24 bg-no-repeat bg-cover">
-          <div className="bg-[rgba(0, 0, 0, 0.4)] rounded-3xl">
+          <div className="bg-layer rounded-3xl">
                     <div className="text-center py-32">
                               <h1 className="text-6xl font-bold text-white leading-[4.5rem]">
                                         Discover an exceptional cooking <br />class tailored for you!

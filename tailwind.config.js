@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
        backgroundImage: {
-        'hero-pattern': "url('./public/img/chef.jpeg')",
+        'hero-pattern': "url('/img/chef.jpeg')",
       }
     },
     colors: {
@@ -17,7 +17,8 @@ export default {
       'black': '#000',
       'p-color': 'rgba(21, 11, 43, 0.60)',
       'card-p-color': '#878787',
-      'sidebar-p-color': 'rgba(40, 40, 40, 0.70)'
+      'sidebar-p-color': 'rgba(40, 40, 40, 0.70)',
+      'layer': 'rgba(0, 0, 0, 0.4)'
     },
     fontFamily: {
       sans: ['Lexend', 'sans-serif']
