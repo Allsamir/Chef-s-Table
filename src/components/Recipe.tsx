@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TimeIcon } from '../icons/TimeIcon'
 import { Flame } from '../icons/Flame'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/ReactToastify.css'
 
 interface ChildProps {
           recipe: {
@@ -12,9 +14,28 @@ interface ChildProps {
                     preparing_time: string,
                     calories: string
           }
+
+          handleWantToCook: (recipe: {
+                    recipe_id: number,
+                    recipe_name: string,
+                    recipe_image: string,
+                    short_description: string,
+                    ingredients: Array<string>,
+                    preparing_time: string,
+                    calories: string
+          }) => void
+
 }
 
-const Recipe: React.FC<ChildProps> = ({recipe}) => {
+const Recipe: React.FC<ChildProps> = ({recipe, handleWantToCook}) => {
+  const [disableButton, setDisableButton] = useState<boolean>(true);
+
+    const showToastMessage = () => {
+          toast("Already Exits !", {
+                    position: 'top-right'
+          })
+  }
+ 
   return (
     <div className="p-6 rounded-2xl border border-solid border-recipe-border">
       <img src={recipe.recipe_image} alt="This is Recipe Image"  className="pb-6 w-full rounded-2xl"/>
@@ -28,9 +49,10 @@ const Recipe: React.FC<ChildProps> = ({recipe}) => {
             <span  className="flex items-center gap-x-2"><TimeIcon /> {recipe.preparing_time}</span>
             <span  className="flex items-center gap-x-2"><Flame /> {recipe.calories}</span>
           </div>
-          <button className="btn border-none rounded-[3.125rem] btn-lg bg-light-green text-black hover:text-light-green hover:bg-black">
+          <button onClick={() => {disableButton && handleWantToCook(recipe); setDisableButton(false); disableButton || showToastMessage()}}  className="btn border-none rounded-[3.125rem] btn-lg bg-light-green text-black hover:text-light-green hover:bg-black">
             Want to Cook
           </button>
+          <ToastContainer />
     </div>  
   )
 }

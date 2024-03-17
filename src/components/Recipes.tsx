@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Recipe from './Recipe'
+import { WantToCook } from './WantToCook';
+import { CurrentlyCooking } from './CurrentlyCooking';
 
 interface Recipes {
           recipe_id: number,
@@ -13,7 +15,8 @@ interface Recipes {
 
 export const Recipes: React.FC = () => {
           const [recipes, setRecipes] = useState<Recipes[]>([]);
-          const [spinner, setSpinner] = useState<boolean>(false)
+          const [spinner, setSpinner] = useState<boolean>(false);
+          const [wantToCook, setWantToCook] = useState<Recipes[]>([]);
 
           useEffect(() => {
                     fetch('./recipes.json')
@@ -22,6 +25,11 @@ export const Recipes: React.FC = () => {
                     .catch(err => console.error(err))
           }, [])
 
+          const handleWantToCook = (recipes: Recipes) => {
+            setWantToCook(
+                  [...wantToCook, recipes]
+            )
+          }
 
   return (
     <>
@@ -33,10 +41,11 @@ export const Recipes: React.FC = () => {
     <div className="text-center mt-12">{spinner || <span className="loading loading-dots loading-lg text-black"></span>}</div>
     <div className="flex lg:flex-row flex-col gap-6 mt-12">
           <div className="lg:w-3/5 w-full grid lg:grid-cols-2 grid-cols-1 gap-6">
-                    {recipes.map(recipe => <Recipe key={recipe.recipe_id} recipe={recipe}/>)}
+                    {recipes.map(recipe => <Recipe key={recipe.recipe_id} recipe={recipe} handleWantToCook={handleWantToCook}/>)}
           </div>
-          <div className="lg:flex-1 w-full">
-
+          <div className="lg:flex-1 w-full border border-solid border-recipe-border rounded-2xl">
+            <WantToCook wantToCookContainer={wantToCook}/>
+            <CurrentlyCooking />
           </div>
     </div>
     </>
