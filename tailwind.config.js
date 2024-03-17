@@ -18,7 +18,8 @@ export default {
       'p-color': 'rgba(21, 11, 43, 0.60)',
       'card-p-color': '#878787',
       'sidebar-p-color': 'rgba(40, 40, 40, 0.70)',
-      'layer': 'rgba(0, 0, 0, 0.4)'
+      'layer': 'rgba(0, 0, 0, 0.4)',
+      'recipe-border': 'rgba(40, 40, 40, 0.20)'
     },
     fontFamily: {
       sans: ['Lexend', 'sans-serif']
