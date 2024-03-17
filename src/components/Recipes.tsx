@@ -19,7 +19,7 @@ export const Recipes: React.FC = () => {
           const [wantToCook, setWantToCook] = useState<Recipes[]>([]);
 
           useEffect(() => {
-                    fetch('./recipes.json')
+                    fetch('recipes.json')
                     .then(response => response.json())
                     .then(data => {setRecipes(data); setSpinner(true)})
                     .catch(err => console.error(err))
