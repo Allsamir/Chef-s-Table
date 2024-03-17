@@ -17,6 +17,7 @@ export const Recipes: React.FC = () => {
           const [recipes, setRecipes] = useState<Recipes[]>([]);
           const [spinner, setSpinner] = useState<boolean>(false);
           const [wantToCook, setWantToCook] = useState<Recipes[]>([]);
+          const [cooking, setCooking] = useState<Recipes[]>([]);
 
           useEffect(() => {
                     fetch('recipes.json')
@@ -28,6 +29,18 @@ export const Recipes: React.FC = () => {
           const handleWantToCook = (recipes: Recipes) => {
             setWantToCook(
                   [...wantToCook, recipes]
+            )
+          }
+
+          const handleCooking = (recipe: Recipes) => {
+              setCooking(
+                [...cooking, recipe]
+              )
+          }
+
+          const deleteWantToCookItem = (id: number) => {
+            setWantToCook(
+              wantToCook.filter(item => item.recipe_id !== id)
             )
           }
 
@@ -44,8 +57,8 @@ export const Recipes: React.FC = () => {
                     {recipes.map(recipe => <Recipe key={recipe.recipe_id} recipe={recipe} handleWantToCook={handleWantToCook}/>)}
           </div>
           <div className="lg:flex-1 w-full border border-solid border-recipe-border rounded-2xl">
-            <WantToCook wantToCookContainer={wantToCook}/>
-            <CurrentlyCooking />
+            <WantToCook wantToCookContainer={wantToCook} handleCooking={handleCooking} deleteWantToCookItem={deleteWantToCookItem}/>
+            <CurrentlyCooking preparingCooking={cooking}/>
           </div>
     </div>
     </>

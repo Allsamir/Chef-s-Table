@@ -12,9 +12,20 @@ interface Recipes {
 
 interface ChildProps {
           wantToCookContainer: Recipes[]
+          handleCooking: (recipe: {
+          recipe_id: number,
+          recipe_name: string,
+          recipe_image: string,
+          short_description: string,
+          ingredients: Array<string>,
+          preparing_time: string,
+          calories: string
+          }) => void
+
+          deleteWantToCookItem: (id: number) => void
 }
 
-export const WantToCook: React.FC<ChildProps> = ({wantToCookContainer}) => {
+export const WantToCook: React.FC<ChildProps> = ({wantToCookContainer, handleCooking, deleteWantToCookItem}) => {
  
 return (
 <div className="p-4">
@@ -38,7 +49,7 @@ return (
           <td>{wantToCook.recipe_name}</td>
           <td>{wantToCook.preparing_time}</td>
           <td>{wantToCook.calories}</td>
-          <td><button className="btn border-none rounded-[3.125rem] bg-light-green text-black hover:text-light-green hover:bg-black">Preparing</button></td>
+          <td><button onClick={() => {handleCooking(wantToCook); deleteWantToCookItem(wantToCook.recipe_id)}} className="btn border-none rounded-[3.125rem] bg-light-green text-black hover:text-light-green hover:bg-black">Preparing</button></td>
       </tr>))}
     </tbody>
   </table>
