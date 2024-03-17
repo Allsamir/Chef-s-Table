@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TimeIcon } from '../icons/TimeIcon'
 import { Flame } from '../icons/Flame'
 import { ToastContainer, toast } from 'react-toastify';
@@ -25,10 +25,12 @@ interface ChildProps {
                     calories: string
           }) => void
 
+          handleDisableButton: (value: boolean) => void
+
+          disableButton: boolean
 }
 
-const Recipe: React.FC<ChildProps> = ({recipe, handleWantToCook}) => {
-  const [disableButton, setDisableButton] = useState<boolean>(true);
+const Recipe: React.FC<ChildProps> = ({recipe, handleWantToCook, disableButton, handleDisableButton}) => {
 
     const showToastMessage = () => {
           toast("Already Exits !", {
@@ -49,7 +51,7 @@ const Recipe: React.FC<ChildProps> = ({recipe, handleWantToCook}) => {
             <span  className="flex items-center gap-x-2"><TimeIcon /> {recipe.preparing_time}</span>
             <span  className="flex items-center gap-x-2"><Flame /> {recipe.calories}</span>
           </div>
-          <button onClick={() => {disableButton && handleWantToCook(recipe); setDisableButton(false); disableButton || showToastMessage()}}  className="btn border-none rounded-[3.125rem] btn-lg bg-light-green text-black hover:text-light-green hover:bg-black">
+          <button onClick={() => {disableButton && handleWantToCook(recipe); handleDisableButton(false); disableButton || showToastMessage()}}  className="btn border-none rounded-[3.125rem] btn-lg bg-light-green text-black hover:text-light-green hover:bg-black">
             Want to Cook
           </button>
           <ToastContainer />

@@ -14,10 +14,12 @@ interface Recipes {
 }
 
 export const Recipes: React.FC = () => {
+
           const [recipes, setRecipes] = useState<Recipes[]>([]);
           const [spinner, setSpinner] = useState<boolean>(false);
           const [wantToCook, setWantToCook] = useState<Recipes[]>([]);
           const [cooking, setCooking] = useState<Recipes[]>([]);
+          const [disableButton, setDisableButton] = useState<boolean>(true);
 
           useEffect(() => {
                     fetch('recipes.json')
@@ -44,6 +46,10 @@ export const Recipes: React.FC = () => {
             )
           }
 
+          const handleDisableButton = (value: boolean) => {
+            setDisableButton(value)
+          }
+
   return (
     <>
     <div className="recipes-title text-center">
@@ -54,10 +60,10 @@ export const Recipes: React.FC = () => {
     <div className="text-center mt-12">{spinner || <span className="loading loading-dots loading-lg text-black"></span>}</div>
     <div className="flex lg:flex-row flex-col gap-6 mt-12">
           <div className="lg:w-3/5 w-full grid lg:grid-cols-2 grid-cols-1 gap-6">
-                    {recipes.map(recipe => <Recipe key={recipe.recipe_id} recipe={recipe} handleWantToCook={handleWantToCook}/>)}
+                    {recipes.map(recipe => <Recipe key={recipe.recipe_id} disableButton={disableButton} handleDisableButton={handleDisableButton} recipe={recipe} handleWantToCook={handleWantToCook}/>)}
           </div>
           <div className="lg:flex-1 w-full border border-solid border-recipe-border rounded-2xl">
-            <WantToCook wantToCookContainer={wantToCook} handleCooking={handleCooking} deleteWantToCookItem={deleteWantToCookItem}/>
+            <WantToCook wantToCookContainer={wantToCook} handleDisableButton={handleDisableButton} handleCooking={handleCooking} deleteWantToCookItem={deleteWantToCookItem}/>
             <CurrentlyCooking preparingCooking={cooking}/>
           </div>
     </div>

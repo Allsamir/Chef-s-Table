@@ -15,7 +15,6 @@ interface ChildProps {
 }
 
 export const CurrentlyCooking:React.FC<ChildProps> = ({preparingCooking}) => {
-
   return (
     <>
     <div className="p-4">
@@ -40,7 +39,19 @@ export const CurrentlyCooking:React.FC<ChildProps> = ({preparingCooking}) => {
           <td>{cooking.preparing_time}</td>
           <td>{cooking.calories}</td>
       </tr>
-      ))}
+      )
+      )}
+      <tr>
+        <th></th>
+        <td></td>
+        <th>Total Time = <br />{preparingCooking.reduce((accumulator, currentElement) => {
+            return accumulator + parseInt(currentElement.preparing_time)
+        }, 0)}</th>
+        <th>Total Calories = <br />{preparingCooking.reduce((accumulator, currentElement) => {
+            // Extract numeric part from calories string using slice
+            return accumulator + parseInt(currentElement.calories.slice(0, 3));
+        }, 0)}</th>
+      </tr>
     </tbody>
   </table>
 </div>
